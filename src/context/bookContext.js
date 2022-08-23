@@ -58,20 +58,8 @@ function BookProvider({ children }) {
     }
   }, [bookData, bookID]);
 
-  // useEffect(
-  //   (keyword) => {
-  //     if (keyword) {
-  //       setSearchURL(
-  //         `https://gutendex.com/books?page=${searchPage}&search=${keyword}`
-  //       );
-  //       setSearchResult(searchData?.results);
-  //       setSearchCount(searchData?.count);
-  //     }
-  //   },
-  //   [searchData, searchPage]
-  // );
-
   const search = (keyword) => {
+    keyword = keyword.replace(':', '');
     if (keyword) {
       setSearchURL(
         `https://gutendex.com/books?page=${searchPage}&search=${keyword}`

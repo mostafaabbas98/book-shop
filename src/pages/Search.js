@@ -28,6 +28,14 @@ function Search() {
     changeSearchPage(selected + 1);
   };
 
+  if (searchLoading) {
+    return <p>Loading</p>;
+  }
+
+  if (searchError) {
+    return <p>Somethin went wrong</p>;
+  }
+
   return (
     <div>
       {!searchLoading && (

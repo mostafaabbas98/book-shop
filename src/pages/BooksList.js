@@ -4,21 +4,31 @@ import { useBook } from '../context/bookContext';
 import ReactPaginate from 'react-paginate';
 
 function BooksList() {
-  const { books, booksCount, loading, error, changePageNumber } = useBook();
+  const { books, booksCount, booksError, booksLoading, changePageNumber } =
+    useBook();
 
   const usersPerPage = 32;
   const changePage = ({ selected }) => {
     changePageNumber(selected + 1);
   };
+
+  if (booksLoading) {
+    return <p>Loading</p>;
+  }
+
+  if (booksError) {
+    return <p>Somethin went wrong</p>;
+  }
+
   return (
     <div className="">
       <div className="w-full flex justify-center gap-7 flex-wrap mt-8">
         {books &&
-          !loading &&
-          !error &&
+          !booksLoading &&
+          !booksError &&
           books.map((book) => <BookCard bookInfo={book} key={book?.id} />)}
       </div>
-      {!loading && !error && (
+      {!booksLoading && !booksError && (
         <ReactPaginate
           pageCount={Math.ceil(booksCount / usersPerPage)}
           onPageChange={changePage}

@@ -6,6 +6,7 @@ import Books from './Books';
 import Book from './Book';
 import Search from './Search';
 import BooksList from './BooksList';
+import NotFound from './NotFound';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="popular" element={<BooksList />} />
           </Route>
           <Route path="/search:key" element={<Search />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </BookProvider>

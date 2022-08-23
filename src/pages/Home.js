@@ -4,7 +4,15 @@ import { useBook } from '../context/bookContext';
 import BookCard from '../components/BookCard';
 
 function Home() {
-  const { books, loading, error } = useBook();
+  const { books, booksLoading, booksError } = useBook();
+
+  if (booksLoading) {
+    return <p>Loading</p>;
+  }
+
+  if (booksError) {
+    return <p>Somethin went wrong </p>;
+  }
 
   return (
     <div className="w-full flex flex-col">
@@ -18,8 +26,8 @@ function Home() {
       </Link>
       <div className="w-full flex justify-center gap-7 flex-wrap mt-8">
         {books &&
-          !loading &&
-          !error &&
+          !booksLoading &&
+          !booksError &&
           books
             .slice(0, 5)
             .map((book) => <BookCard bookInfo={book} key={book?.id} />)}

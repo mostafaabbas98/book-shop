@@ -3,12 +3,20 @@ import { useParams } from 'react-router-dom';
 import { useBook } from '../context/bookContext';
 
 function Book() {
-  const { singleBook, changePageID, bookLoading } = useBook();
+  const { singleBook, changePageID, bookLoading, bookError } = useBook();
   const { bookid } = useParams();
 
   useEffect(() => {
     changePageID(bookid.replace(':', ''));
   }, [changePageID, bookid]);
+
+  if (bookLoading) {
+    return <p>Loading</p>;
+  }
+
+  if (bookError) {
+    return <p>Somethin went wrong </p>;
+  }
 
   return (
     !bookLoading && (
